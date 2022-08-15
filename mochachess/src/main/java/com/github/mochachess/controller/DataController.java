@@ -1,7 +1,7 @@
 package com.github.mochachess.controller;
 
-import com.github.mochachess.Data;
-import com.github.mochachess.service.DataServiceImpl;
+import com.github.mochachess.service.PdViewLogging;
+import com.github.mochachess.service.PdViewLoggingImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,32 +13,32 @@ import java.util.List;
 @RequestMapping("/data")
 public class DataController {
 
-    private final DataServiceImpl dataService;
+    private final PdViewLoggingImpl pdViewLogging;
 
-    public DataController(DataServiceImpl dataService) {
-        this.dataService = dataService;
+    public DataController(PdViewLoggingImpl pdViewLogging) {
+        this.pdViewLogging = pdViewLogging;
     }
 
     @GetMapping("/getById")
-    public Data getDataById(@RequestParam Long id) {
-        return dataService.getDataById(id);
+    public PdViewLogging getDataById(@RequestParam Long id) {
+        return pdViewLogging.getDataById(id);
     }
 
     @GetMapping("/getAll")
-    public List<Data> getAll() {
-        return dataService.getAll();
+    public List<PdViewLogging> getAll() {
+        return pdViewLogging.getAll();
     }
 
     @GetMapping("/remove")
     public String removeById(@RequestParam Long id) {
-        dataService.removeData(id);
+        pdViewLogging.removeLog(id);
         return "Надеюсь успешный успех))";
     }
 
     @GetMapping("/add")
-    public Data addData(@RequestParam String name,
-                        @RequestParam String description) {
-        return dataService.addData(name, description);
+    public PdViewLogging addLog(@RequestParam String name,
+                                @RequestParam String description) {
+        return pdViewLogging.addLog(name, description);
     }
 
 
